@@ -1,0 +1,177 @@
+<!-- Hero Banner -->
+<section class="hero-banner">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Learn without limits</h1>
+        <p>Access over 10,000 online courses from top instructors and industry experts. Start learning today!</p>
+        <div class="hero-buttons">
+          <a href="#" class="btn primary large">Browse Courses</a>
+          <a href="#" class="btn secondary large">View Plans</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://source.unsplash.com/random/600x400/?learning" alt="Online Learning">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Limited time offers -->
+<section class="limited-offers" *ngIf="limitedTimeOffers.length > 0">
+  <div class="container">
+    <div class="offer-banner" [ngStyle]="{'background-image': 'url(' + limitedTimeOffers[0].imageUrl + ')'}">
+      <div class="offer-content">
+        <h2>{{ limitedTimeOffers[0].title }}</h2>
+        <p>{{ limitedTimeOffers[0].description }}</p>
+        <div class="countdown">{{ limitedTimeOffers[0].expiryDate }}</div>
+        <a href="#" class="btn primary">Shop Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="categories-section">
+  <div class="container">
+    <h2 class="section-title">Top Categories</h2>
+    <div class="categories-grid">
+      @for (category of categories; track category.name) {
+        <a href="#" class="category-card">
+          <div class="category-icon">{{ category.icon }}</div>
+          <div class="category-image">
+            <img [src]="category.imageUrl" [alt]="category.name">
+          </div>
+          <div class="category-info">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.courseCount }} courses</p>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Featured Courses -->
+<section class="courses-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Courses</h2>
+      <a href="#" class="view-all">View All</a>
+    </div>
+    <div class="courses-grid">
+      @for (course of featuredCourses; track course.id) {
+        <div class="course-card">
+          <div class="course-image">
+            <img [src]="course.imageUrl" [alt]="course.title">
+            @if (course.bestseller) {
+              <span class="bestseller-badge">Bestseller</span>
+            }
+          </div>
+          <div class="course-content">
+            <h3 class="course-title">{{ course.title }}</h3>
+            <p class="course-instructor">{{ course.instructor }}</p>
+            <div class="course-rating">
+              <span class="rating">{{ course.rating }}</span>
+              <span class="stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span class="star" [class.filled]="course.rating >= star">★</span>
+                }
+              </span>
+              <span class="review-count">({{ course.reviewCount }})</span>
+            </div>
+            <div class="course-meta">
+              <span class="level">{{ course.level }}</span>
+              <span class="duration">{{ course.duration }}</span>
+            </div>
+            <div class="course-price">
+              <span class="discount-price">${{ course.discountPrice }}</span>
+              <span class="original-price">${{ course.price }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Popular Instructors -->
+<section class="instructors-section">
+  <div class="container">
+    <h2 class="section-title">Popular Instructors</h2>
+    <div class="instructors-grid">
+      @for (instructor of popularInstructors; track instructor.name) {
+        <div class="instructor-card">
+          <div class="instructor-image">
+            <img [src]="instructor.imageUrl" [alt]="instructor.name">
+          </div>
+          <div class="instructor-info">
+            <h3>{{ instructor.name }}</h3>
+            <p class="specialty">{{ instructor.specialty }}</p>
+            <div class="instructor-rating">
+              <span class="rating">{{ instructor.rating }}</span>
+              <span class="star filled">★</span>
+              <span class="rating-text">Instructor Rating</span>
+            </div>
+            <div class="instructor-stats">
+              <div class="stat">
+                <span class="stat-value">{{ instructor.courseCount }}</span>
+                <span class="stat-label">Courses</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value">{{ instructor.studentCount | number }}</span>
+                <span class="stat-label">Students</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">What Our Students Say</h2>
+    <div class="testimonials-grid">
+      @for (testimonial of testimonials; track testimonial.name) {
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <div class="student-image">
+              <img [src]="testimonial.imageUrl" [alt]="testimonial.name">
+            </div>
+            <div class="student-info">
+              <h4>{{ testimonial.name }}</h4>
+              <p>Student of {{ testimonial.course }}</p>
+              <div class="rating">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span class="star" [class.filled]="testimonial.rating >= star">★</span>
+                }
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-content">
+            <p>"{{ testimonial.text }}"</p>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Become an Instructor CTA -->
+<section class="instructor-cta">
+  <div class="container">
+    <div class="cta-content">
+      <div class="cta-image">
+        <img src="https://source.unsplash.com/random/500x400/?teacher" alt="Become an Instructor">
+      </div>
+      <div class="cta-text">
+        <h2>Become an instructor</h2>
+        <p>Join thousands of instructors teaching millions of students worldwide. Share your knowledge and earn income by creating online courses.</p>
+        <a href="#" class="btn primary">Start Teaching Today</a>
+      </div>
+    </div>
+  </div>
+</section>

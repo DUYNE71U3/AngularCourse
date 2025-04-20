@@ -1,0 +1,108 @@
+<!-- Header with navigation -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <img src="assets/logoHutech.png" alt="CourseHub Logo">
+        <h1>{{ platformName }}</h1>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for anything" [(ngModel)]="searchQuery">
+        <button class="search-button">
+          <i class="search-icon">🔍</i>
+        </button>
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">Categories</a></li>
+          <li><a href="#">Teach on {{ platformName }}</a></li>
+          <li><a href="#">My Learning</a></li>
+          <li><a href="#">Wishlist</a></li>
+        </ul>
+      </nav>
+      <div class="user-actions">
+        <a href="#" class="btn outline">Log in</a>
+        <a href="#" class="btn primary">Sign up</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="content">
+    <router-outlet />
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h3>{{ platformName }}</h3>
+        <p>Learn from anywhere, anytime. Access thousands of courses taught by industry experts.</p>
+        <div class="contact">
+          <p><i class="icon">📍</i> 123 Education Lane, Knowledge City</p>
+          <p><i class="icon">📞</i> (555) 123-4567</p>
+          <p><i class="icon">✉️</i> info&#64;coursehub.com</p>
+        </div>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#">Web Development</a></li>
+          <li><a href="#">Data Science</a></li>
+          <li><a href="#">Business</a></li>
+          <li><a href="#">Design</a></li>
+          <li><a href="#">Marketing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="#">Learners</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Developers</a></li>
+          <li><a href="#">Teaching Center</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section links">
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section newsletter">
+        <h3>Subscribe to our newsletter</h3>
+        <p>Get the latest news and updates on new courses</p>
+        <div class="subscribe-form">
+          <input type="email" placeholder="Your email address">
+          <button class="btn primary">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="social-icons">
+        <a href="#" class="social-icon">Facebook</a>
+        <a href="#" class="social-icon">Twitter</a>
+        <a href="#" class="social-icon">Instagram</a>
+        <a href="#" class="social-icon">LinkedIn</a>
+        <a href="#" class="social-icon">YouTube</a>
+      </div>
+      <div class="copyright">
+        <p>&copy; {{ currentYear }} {{ platformName }}. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>

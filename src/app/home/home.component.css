@@ -1,0 +1,471 @@
+/* Page-specific styles */
+:host {
+  display: block;
+}
+
+/* Hero Banner */
+.hero-banner {
+  background-color: #f7f9fa;
+  padding: 3rem 0;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-text {
+  flex: 1;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #3c3b37;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-image {
+  flex: 1;
+}
+
+.hero-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Limited Time Offers */
+.limited-offers {
+  margin: 2rem 0;
+}
+
+.offer-banner {
+  background-color: #f7f9fa;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.offer-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.offer-content {
+  position: relative;
+  padding: 3rem 2rem;
+  color: white;
+  text-align: center;
+}
+
+.offer-content h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+.countdown {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+/* Categories Section */
+.categories-section {
+  padding: 3rem 0;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-card {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #3c3b37;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon {
+  font-size: 2rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category-image {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.category-info {
+  padding: 1rem;
+}
+
+.category-info h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.category-info p {
+  margin: 0.5rem 0 0;
+  color: #73726c;
+  font-size: 0.9rem;
+}
+
+/* Courses Section */
+.courses-section {
+  padding: 3rem 0;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.course-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-image {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bestseller-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #eceb98;
+  color: #3d3c0a;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.course-content {
+  padding: 1rem;
+}
+
+.course-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.course-instructor {
+  margin: 0.25rem 0;
+  color: #73726c;
+  font-size: 0.9rem;
+}
+
+.course-rating {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.rating {
+  font-weight: 700;
+  color: #b4690e;
+  margin-right: 0.25rem;
+}
+
+.stars {
+  color: #eb8a2f;
+  font-size: 0.9rem;
+}
+
+.star {
+  color: #dedfe0;
+}
+
+.star.filled {
+  color: #eb8a2f;
+}
+
+.review-count {
+  color: #73726c;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+.course-meta {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #73726c;
+}
+
+.course-price {
+  margin-top: 0.5rem;
+}
+
+.discount-price {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #73726c;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* Instructors Section */
+.instructors-section {
+  padding: 3rem 0;
+  background-color: #f7f9fa;
+}
+
+.instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.instructor-card {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.instructor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.instructor-image {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.instructor-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instructor-info {
+  padding: 1rem;
+  flex: 1;
+}
+
+.instructor-info h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.specialty {
+  color: #73726c;
+  font-size: 0.9rem;
+  margin: 0.25rem 0;
+}
+
+.instructor-rating {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+
+.rating-text {
+  color: #73726c;
+  margin-left: 0.25rem;
+}
+
+.instructor-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #73726c;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  padding: 3rem 0;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1.5rem;
+}
+
+.testimonial-card {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.student-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+.student-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.student-info h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.student-info p {
+  margin: 0.25rem 0 0.5rem;
+  color: #73726c;
+  font-size: 0.9rem;
+}
+
+.testimonial-content {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Instructor CTA Section */
+.instructor-cta {
+  padding: 3rem 0;
+  background-color: #f7f9fa;
+}
+
+.cta-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.cta-image {
+  flex: 1;
+}
+
+.cta-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.cta-text {
+  flex: 1;
+}
+
+.cta-text h2 {
+  font-size: 2rem;
+  margin-top: 0;
+}
+
+@media (max-width: 576px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .instructor-card {
+    flex-direction: column;
+  }
+
+  .instructor-image {
+    width: 100%;
+    height: 150px;
+  }
+}
