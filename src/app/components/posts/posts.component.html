@@ -1,0 +1,40 @@
+<section class="posts-section">
+  <div class="container">
+    <h2 class="section-title">Bài Viết Mới Nhất</h2>
+
+    <!-- Hiển thị trạng thái loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Đang tải bài viết...</p>
+    </div>
+
+    <!-- Hiển thị thông báo lỗi -->
+    <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button class="btn primary" (click)="loadPosts()">Thử lại</button>
+    </div>
+
+    <!-- Hiển thị danh sách bài viết -->
+    <div class="posts-grid" *ngIf="!loading && !error && posts.length">
+      <div class="post-card" *ngFor="let post of posts">
+        <div class="post-image">
+          <img [src]="post.thumbnail || 'assets/onlinelearning.png'" [alt]="post.title">
+        </div>
+        <div class="post-content">
+          <h3 class="post-title">{{ post.title }}</h3>
+          <div class="post-meta">
+            <span class="post-category">{{ post.category }}</span>
+            <span class="post-date">{{ post.publishedAt | date:'dd/MM/yyyy' }}</span>
+          </div>
+          <p class="post-excerpt">{{ post.content | slice:0:120 }}...</p>
+          <a [routerLink]="['/post', post.id]" class="btn secondary">Đọc thêm</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hiển thị khi không có bài viết -->
+    <div class="no-posts" *ngIf="!loading && !error && posts.length === 0">
+      <p>Không có bài viết nào.</p>
+    </div>
+  </div>
+</section>

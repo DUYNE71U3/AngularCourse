@@ -1,0 +1,17 @@
+<!-- Categories Section -->
+<section class="categories-section">
+  <div class="container">
+    <h2 class="section-title">Top Categories</h2>
+    <div class="categories-grid">
+      @for (category of categories; track category.name) {
+        <a href="#" class="category-card">
+          <div class="category-icon">{{ category.icon }}</div>
+          <div class="category-info">
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.courseCount }} courses</p>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<section class="post-detail-section">
+  <div class="container">
+    <!-- Hiển thị trạng thái loading -->
+    <div class="loading-state" *ngIf="loading">
+      <div class="spinner"></div>
+      <p>Đang tải bài viết...</p>
+    </div>
+
+    <!-- Hiển thị thông báo lỗi -->
+    <div class="error-message" *ngIf="error">
+      <p>{{ error }}</p>
+      <button class="btn primary" (click)="loadPostDetail()">Thử lại</button>
+      <a routerLink="/posts" class="btn secondary">Quay lại danh sách</a>
+    </div>
+
+    <!-- Hiển thị chi tiết bài viết -->
+    <div class="post-content" *ngIf="post && !loading">
+      <div class="back-link">
+        <a routerLink="/posts">&larr; Quay lại danh sách bài viết</a>
+      </div>
+
+      <div class="post-header">
+        <h1 class="post-title">{{ post.title }}</h1>
+        <div class="post-meta">
+          <span class="post-category">{{ post.category }}</span>
+          <span class="post-date">Đăng ngày: {{ post.publishedAt | date:'dd/MM/yyyy' }}</span>
+          <span class="post-date" *ngIf="post.updatedAt !== post.publishedAt">
+            Cập nhật: {{ post.updatedAt | date:'dd/MM/yyyy' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="post-image" *ngIf="post.image">
+        <img [src]="post.image" [alt]="post.title">
+      </div>
+
+      <div class="post-body">
+        <p>{{ post.content }}</p>
+      </div>
+
+      <div class="post-actions">
+        <button class="btn secondary">Chia sẻ</button>
+        <button class="btn secondary">Lưu</button>
+      </div>
+    </div>
+  </div>
+</section>

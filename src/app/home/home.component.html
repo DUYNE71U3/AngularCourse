@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="hero-image">
-        <img src="https://source.unsplash.com/random/600x400/?learning" alt="Online Learning">
+        <img src="assets/girlthumbpic.png" alt="Online Learning">
       </div>
     </div>
   </div>
@@ -31,104 +31,14 @@
   </div>
 </section>
 
-<!-- Categories -->
-<section class="categories-section">
-  <div class="container">
-    <h2 class="section-title">Top Categories</h2>
-    <div class="categories-grid">
-      @for (category of categories; track category.name) {
-        <a href="#" class="category-card">
-          <div class="category-icon">{{ category.icon }}</div>
-          <div class="category-image">
-            <img [src]="category.imageUrl" [alt]="category.name">
-          </div>
-          <div class="category-info">
-            <h3>{{ category.name }}</h3>
-            <p>{{ category.courseCount }} courses</p>
-          </div>
-        </a>
-      }
-    </div>
-  </div>
-</section>
+<!-- Categories Component -->
+<app-categories></app-categories>
 
-<!-- Featured Courses -->
-<section class="courses-section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Featured Courses</h2>
-      <a href="#" class="view-all">View All</a>
-    </div>
-    <div class="courses-grid">
-      @for (course of featuredCourses; track course.id) {
-        <div class="course-card">
-          <div class="course-image">
-            <img [src]="course.imageUrl" [alt]="course.title">
-            @if (course.bestseller) {
-              <span class="bestseller-badge">Bestseller</span>
-            }
-          </div>
-          <div class="course-content">
-            <h3 class="course-title">{{ course.title }}</h3>
-            <p class="course-instructor">{{ course.instructor }}</p>
-            <div class="course-rating">
-              <span class="rating">{{ course.rating }}</span>
-              <span class="stars">
-                @for (star of [1,2,3,4,5]; track star) {
-                  <span class="star" [class.filled]="course.rating >= star">★</span>
-                }
-              </span>
-              <span class="review-count">({{ course.reviewCount }})</span>
-            </div>
-            <div class="course-meta">
-              <span class="level">{{ course.level }}</span>
-              <span class="duration">{{ course.duration }}</span>
-            </div>
-            <div class="course-price">
-              <span class="discount-price">${{ course.discountPrice }}</span>
-              <span class="original-price">${{ course.price }}</span>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  </div>
-</section>
+<!-- Featured Courses Component -->
+<app-featured-courses></app-featured-courses>
 
-<!-- Popular Instructors -->
-<section class="instructors-section">
-  <div class="container">
-    <h2 class="section-title">Popular Instructors</h2>
-    <div class="instructors-grid">
-      @for (instructor of popularInstructors; track instructor.name) {
-        <div class="instructor-card">
-          <div class="instructor-image">
-            <img [src]="instructor.imageUrl" [alt]="instructor.name">
-          </div>
-          <div class="instructor-info">
-            <h3>{{ instructor.name }}</h3>
-            <p class="specialty">{{ instructor.specialty }}</p>
-            <div class="instructor-rating">
-              <span class="rating">{{ instructor.rating }}</span>
-              <span class="star filled">★</span>
-              <span class="rating-text">Instructor Rating</span>
-            </div>
-            <div class="instructor-stats">
-              <div class="stat">
-                <span class="stat-value">{{ instructor.courseCount }}</span>
-                <span class="stat-label">Courses</span>
-              </div>
-              <div class="stat">
-                <span class="stat-value">{{ instructor.studentCount | number }}</span>
-                <span class="stat-label">Students</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      }
-    </div>
-  </div>
-</section>
+<!-- Popular Instructors Component -->
+<app-popular-instructors></app-popular-instructors>
 
 <!-- Testimonials -->
 <section class="testimonials-section">
@@ -165,7 +75,7 @@
   <div class="container">
     <div class="cta-content">
       <div class="cta-image">
-        <img src="https://source.unsplash.com/random/500x400/?teacher" alt="Become an Instructor">
+        <img src="assets/giaovien.png" alt="Become an Instructor">
       </div>
       <div class="cta-text">
         <h2>Become an instructor</h2>

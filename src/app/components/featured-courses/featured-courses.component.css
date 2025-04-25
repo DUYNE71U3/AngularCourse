@@ -1,0 +1,138 @@
+/* Courses Section */
+.courses-section {
+  padding: 3rem 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.view-all {
+  color: #5624d0;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.view-all:hover {
+  text-decoration: underline;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background-color: white;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.course-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.course-image {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+}
+
+.course-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bestseller-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #eceb98;
+  color: #3d3c0a;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.course-content {
+  padding: 1rem;
+}
+
+.course-title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.course-instructor {
+  margin: 0.25rem 0;
+  color: #73726c;
+  font-size: 0.9rem;
+}
+
+.course-rating {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.rating {
+  font-weight: 700;
+  color: #b4690e;
+  margin-right: 0.25rem;
+}
+
+.stars {
+  color: #eb8a2f;
+  font-size: 0.9rem;
+}
+
+.star {
+  color: #dedfe0;
+}
+
+.star.filled {
+  color: #eb8a2f;
+}
+
+.review-count {
+  color: #73726c;
+  font-size: 0.9rem;
+  margin-left: 0.25rem;
+}
+
+.course-meta {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: #73726c;
+}
+
+.course-price {
+  margin-top: 0.5rem;
+}
+
+.discount-price {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #73726c;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}

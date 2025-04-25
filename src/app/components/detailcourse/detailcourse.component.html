@@ -1,0 +1,95 @@
+<div class="course-detail-container" *ngIf="course">
+  <div class="container">
+    <!-- Course Header -->
+    <div class="course-header">
+      <div class="course-header-content">
+        <h1 class="course-title">{{ course.title }}</h1>
+
+        <div class="course-meta">
+          <div class="course-category">Category: {{ course.category }}</div>
+          <div class="course-rating">
+            <span class="rating">{{ course.rating }}</span>
+            <span class="stars">
+              @for (star of [1,2,3,4,5]; track star) {
+                <span class="star" [class.filled]="course.rating >= star">★</span>
+              }
+            </span>
+            <span class="review-count">({{ course.reviewCount }} reviews)</span>
+          </div>
+          <div class="course-instructor">Instructor: {{ course.instructor }}</div>
+        </div>
+
+        <div class="course-badges">
+          @if (course.bestseller) {
+            <span class="bestseller-badge">Bestseller</span>
+          }
+          <span class="level-badge">{{ course.level }}</span>
+          <span class="duration-badge">{{ course.duration }}</span>
+        </div>
+      </div>
+
+      <div class="course-image">
+        <img [src]="course.imageUrl" [alt]="course.title">
+      </div>
+    </div>
+
+    <!-- Course Details -->
+    <div class="course-details">
+      <div class="course-main">
+        <!-- Description -->
+        <div class="course-section">
+          <h2 class="section-title">Description</h2>
+          <p class="course-description">{{ course.description }}</p>
+        </div>
+
+        <!-- Topics -->
+        <div class="course-section">
+          <h2 class="section-title">What You'll Learn</h2>
+          <ul class="topics-list">
+            @for (topic of course.topics; track topic) {
+              <li class="topic-item">{{ topic }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Course Sidebar -->
+      <div class="course-sidebar">
+        <div class="course-card">
+          <div class="price-section">
+            <div class="current-price">${{ course.discountPrice }}</div>
+            <div class="original-price">${{ course.price }}</div>
+            <div class="discount">
+              {{ ((course.price - course.discountPrice) / course.price * 100) | number:'1.0-0' }}% off
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn primary full-width">Enroll Now</button>
+            <button class="btn outline full-width">Add to Wishlist</button>
+          </div>
+
+          <div class="guarantee">30-Day Money-Back Guarantee</div>
+
+          <div class="course-includes">
+            <h3>This course includes:</h3>
+            <ul>
+              <li>{{ course.duration }} on-demand video</li>
+              <li>Full lifetime access</li>
+              <li>Access on mobile and TV</li>
+              <li>Certificate of completion</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="error-message" *ngIf="!course">
+  <div class="container">
+    <h2>Course not found</h2>
+    <p>Sorry, we couldn't find the course you're looking for.</p>
+    <a routerLink="/" class="btn primary">Back to Home</a>
+  </div>
+</div>

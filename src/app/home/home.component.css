@@ -5,45 +5,79 @@
 
 /* Hero Banner */
 .hero-banner {
-  background-color: #f7f9fa;
-  padding: 3rem 0;
+  background: #fff8bc; /* Màu vàng đồng nhất như trong mẫu */
+  padding: 60px 0;
+  overflow: hidden;
 }
 
 .hero-content {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .hero-text {
   flex: 1;
+  max-width: 600px;
 }
 
 .hero-text h1 {
-  font-size: 2.5rem;
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: #3c3b37;
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 .hero-text p {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #333;
 }
 
 .hero-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 15px;
+}
+
+.btn.primary {
+  background-color: #a435f0; /* Màu tím như trong mẫu */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  display: inline-block;
+}
+
+.btn.primary:hover {
+  background-color: #8710d8;
+}
+
+.btn.secondary {
+  background-color: transparent;
+  color: #333;
+  padding: 12px 24px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  border: 1px solid #333;
+  display: inline-block;
+}
+
+.btn.large {
+  font-size: 1.1rem;
 }
 
 .hero-image {
   flex: 1;
+  text-align: right; /* Căn phải hình ảnh */
 }
 
 .hero-image img {
-  width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  max-height: 400px;
 }
 
 /* Limited Time Offers */
@@ -438,21 +472,35 @@
 }
 
 .cta-image {
-  flex: 1;
+  flex: 0.6; /* Giảm không gian dành cho ảnh */
+  max-width: 150px; /* Giới hạn chiều rộng tối đa */
 }
 
 .cta-image img {
   width: 100%;
   border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ để tăng độ nổi bật */
 }
 
 .cta-text {
-  flex: 1;
+  flex: 1.4; /* Tăng không gian dành cho phần text */
 }
 
 .cta-text h2 {
   font-size: 2rem;
   margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .cta-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .cta-image {
+    margin-bottom: 2rem;
+    max-width: 250px; /* Giảm kích thước ảnh hơn nữa trên mobile */
+  }
 }
 
 @media (max-width: 576px) {

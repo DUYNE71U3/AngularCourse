@@ -1,0 +1,410 @@
+<div class="user-dashboard">
+  <!-- Header Section -->
+  <div class="dashboard-header">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2><i class="fas fa-users"></i> Quản lý người dùng</h2>
+          <p class="text-muted">Quản lý thông tin và dữ liệu người dùng trong hệ thống</p>
+        </div>
+        <div class="col-lg-6">
+          <div class="dashboard-actions text-end">
+            <button class="btn btn-outline-secondary me-2">
+              <i class="fas fa-download"></i> Xuất dữ liệu
+            </button>
+            <button class="btn btn-outline-secondary">
+              <i class="fas fa-cog"></i> Cài đặt
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="dashboard-content">
+    <div class="container-fluid">
+      <!-- Stats Cards -->
+      <div class="row stats-cards mb-4">
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-card-body">
+              <div class="stat-card-icon bg-primary">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="stat-card-info">
+                <h5>Người dùng</h5>
+                <h3>{{ filteredUsers.length }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-card-body">
+              <div class="stat-card-icon bg-success">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <div class="stat-card-info">
+                <h5>Hoạt động</h5>
+                <h3>{{ Math.round(filteredUsers.length * 0.7) }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-card-body">
+              <div class="stat-card-icon bg-warning">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-card-info">
+                <h5>Đang chờ</h5>
+                <h3>{{ Math.round(filteredUsers.length * 0.2) }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="stat-card">
+            <div class="stat-card-body">
+              <div class="stat-card-icon bg-danger">
+                <i class="fas fa-user-times"></i>
+              </div>
+              <div class="stat-card-info">
+                <h5>Đã khóa</h5>
+                <h3>{{ Math.round(filteredUsers.length * 0.1) }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alert Section -->
+      <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <div class="d-flex align-items-center">
+          <i class="fas fa-exclamation-circle me-2"></i>
+          <strong>Lỗi!</strong> {{ error }}
+        </div>
+        <button type="button" class="btn-close" (click)="error = null"></button>
+      </div>
+
+      <!-- Search and Add User Section -->
+      <div class="row mb-4">
+        <div class="col-lg-8">
+          <div class="search-box">
+            <div class="input-group">
+              <span class="input-group-text bg-white">
+                <i class="fas fa-search"></i>
+              </span>
+              <input
+                type="text"
+                class="form-control border-start-0"
+                placeholder="Tìm kiếm theo tên, tên người dùng hoặc email..."
+                [(ngModel)]="searchTerm"
+                (input)="onSearch()">
+              <button class="btn btn-primary" type="button" (click)="onSearch()">Tìm kiếm</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#addUserModal">
+            <i class="fas fa-plus-circle me-1"></i> Thêm người dùng mới
+          </button>
+        </div>
+      </div>
+
+      <!-- Users Table -->
+      <div class="user-table-container">
+        <div class="card">
+          <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5 class="mb-0">Danh sách người dùng</h5>
+              <div class="table-actions">
+                <button class="btn btn-sm btn-outline-secondary">
+                  <i class="fas fa-filter me-1"></i> Lọc
+                </button>
+                <div class="btn-group ms-2">
+                  <button class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-list"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-th-large"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <!-- Loading Spinner -->
+            <div *ngIf="loading" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Đang tải...</span>
+              </div>
+              <p class="mt-2 text-muted">Đang tải dữ liệu người dùng...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div *ngIf="!loading && filteredUsers.length === 0" class="empty-state py-5">
+              <div class="text-center">
+                <i class="fas fa-users fa-4x text-muted mb-3"></i>
+                <h5>Không tìm thấy người dùng</h5>
+                <p class="text-muted">Không có người dùng nào khớp với tìm kiếm của bạn hoặc danh sách người dùng trống.</p>
+                <button class="btn btn-primary" (click)="searchTerm = ''; onSearch()">Xóa bộ lọc</button>
+              </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0" *ngIf="!loading && filteredUsers.length > 0">
+                <thead class="table-light">
+                  <tr>
+                    <th>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="">
+                      </div>
+                    </th>
+                    <th>Người dùng</th>
+                    <th>Email</th>
+                    <th>Số điện thoại</th>
+                    <th>Website</th>
+                    <th>Trạng thái</th>
+                    <th class="text-end">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of filteredUsers; let i = index">
+                    <td>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="">
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <div class="avatar-circle" [style.background-color]="getAvatarColor(user.name)">
+                          {{ getInitials(user.name) }}
+                        </div>
+                        <div class="ms-3">
+                          <h6 class="mb-0">{{ user.name }}</h6>
+                          <small class="text-muted">&#64;{{ user.username }}</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <i class="fas fa-envelope text-muted me-2"></i>
+                        <span>{{ user.email }}</span>
+                      </div>
+                    </td>
+                    <td>{{ user.phone || 'Không có' }}</td>
+                    <td>
+                      <a *ngIf="user.website" href="https://{{ user.website }}" target="_blank" class="text-decoration-none">
+                        {{ user.website }}
+                        <i class="fas fa-external-link-alt ms-1 small"></i>
+                      </a>
+                      <span *ngIf="!user.website" class="text-muted">Không có</span>
+                    </td>
+                    <td>
+                      <span class="badge rounded-pill" [ngClass]="getStatusClass(i)">
+                        {{ getStatusText(i) }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="text-end">
+                        <div class="dropdown">
+                          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-ellipsis-v"></i>
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-eye me-2"></i>Xem chi tiết</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i>Chỉnh sửa</a></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash-alt me-2"></i>Xóa</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer bg-white" *ngIf="!loading && filteredUsers.length > 0">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="text-muted">Hiển thị {{ filteredUsers.length }} trong tổng số {{ users.length }} người dùng</span>
+              </div>
+              <nav>
+                <ul class="pagination pagination-sm mb-0">
+                  <li class="page-item disabled"><a class="page-link" href="#">Trước</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalLabel">Thêm người dùng mới</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Chuyển sang sử dụng [formGroup] thay vì #userForm="ngForm" -->
+          <form [formGroup]="userForm">
+            <div class="mb-3">
+              <label for="userName" class="form-label">Tên người dùng <span class="text-danger">*</span></label>
+              <input
+                type="text"
+                class="form-control"
+                id="userName"
+                formControlName="name"
+                placeholder="Nhập tên người dùng"
+                [ngClass]="{'is-invalid': f['name'].invalid && f['name'].touched, 'is-valid': f['name'].valid && f['name'].touched}">
+              <div class="invalid-feedback" *ngIf="f['name'].invalid && f['name'].touched">
+                <span *ngIf="f['name'].errors?.['required']">Tên người dùng không được để trống.</span>
+                <span *ngIf="f['name'].errors?.['minlength']">Tên người dùng phải có ít nhất 3 ký tự.</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="userEmail" class="form-label">Email <span class="text-danger">*</span></label>
+              <input
+                type="email"
+                class="form-control"
+                id="userEmail"
+                formControlName="email"
+                placeholder="Nhập địa chỉ email"
+                [ngClass]="{'is-invalid': f['email'].invalid && f['email'].touched, 'is-valid': f['email'].valid && f['email'].touched}">
+              <div class="invalid-feedback" *ngIf="f['email'].invalid && f['email'].touched">
+                <span *ngIf="f['email'].errors?.['required']">Email không được để trống.</span>
+                <span *ngIf="f['email'].errors?.['email']">Email không đúng định dạng.</span>
+              </div>
+              <div class="form-text">Email sẽ được sử dụng để đăng nhập.</div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col">
+                <label for="userPhone" class="form-label">Số điện thoại <span class="text-danger">*</span></label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="userPhone"
+                  formControlName="phone"
+                  placeholder="Nhập số điện thoại"
+                  [ngClass]="{'is-invalid': f['phone'].invalid && f['phone'].touched, 'is-valid': f['phone'].valid && f['phone'].touched}">
+                <div class="invalid-feedback" *ngIf="f['phone'].invalid && f['phone'].touched">
+                  <span *ngIf="f['phone'].errors?.['required']">Số điện thoại không được để trống.</span>
+                  <span *ngIf="f['phone'].errors?.['pattern']">Số điện thoại không hợp lệ (phải là số điện thoại Việt Nam).</span>
+                </div>
+              </div>
+              <div class="col">
+                <label for="userWebsite" class="form-label">Website</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userWebsite"
+                  formControlName="website"
+                  placeholder="Nhập website"
+                  [ngClass]="{'is-invalid': f['website'].invalid && f['website'].touched, 'is-valid': f['website'].valid && f['website'].touched}">
+                <div class="invalid-feedback" *ngIf="f['website'].invalid && f['website'].touched">
+                  Website không hợp lệ (ví dụ: example.com hoặc www.example.com).
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Group lồng nhau cho address -->
+            <div formGroupName="address" class="mb-3">
+              <label class="form-label">Địa chỉ</label>
+              <div class="row g-2 mb-2">
+                <div class="col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Đường"
+                    formControlName="street">
+                </div>
+                <div class="col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Căn hộ/Suite"
+                    formControlName="suite">
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col-md-8">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Thành phố"
+                    formControlName="city"
+                    [ngClass]="{'is-invalid': addressControls['city'].invalid && addressControls['city'].touched}">
+                  <div class="invalid-feedback" *ngIf="addressControls['city'].invalid && addressControls['city'].touched">
+                    Thành phố không được để trống.
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Mã bưu điện"
+                    formControlName="zipcode">
+                </div>
+              </div>
+            </div>
+
+            <!-- Form Group lồng nhau cho company -->
+            <div formGroupName="company" class="mb-3">
+              <label class="form-label">Thông tin công ty</label>
+              <input
+                type="text"
+                class="form-control mb-2"
+                placeholder="Tên công ty"
+                formControlName="name">
+              <input
+                type="text"
+                class="form-control mb-2"
+                placeholder="Slogan"
+                formControlName="catchPhrase">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Mô tả ngắn"
+                formControlName="bs">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Trạng thái</label>
+              <div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="userStatus" id="statusActive" checked>
+                  <label class="form-check-label" for="statusActive">Hoạt động</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="userStatus" id="statusInactive">
+                  <label class="form-check-label" for="statusInactive">Không hoạt động</label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+          <!-- Gọi submitForm() không cần truyền tham số form -->
+          <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="submitForm()" data-bs-dismiss="modal">
+            <i class="fas fa-plus-circle me-1"></i> Thêm người dùng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

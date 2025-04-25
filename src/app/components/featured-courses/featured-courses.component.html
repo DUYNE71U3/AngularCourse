@@ -1,0 +1,42 @@
+<!-- Featured Courses -->
+<section class="courses-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Courses</h2>
+      <a href="#" class="view-all">View All</a>
+    </div>
+    <div class="courses-grid">
+      @for (course of featuredCourses; track course.id) {
+        <div class="course-card" [routerLink]="['/course', course.id]" style="cursor: pointer;">
+          <div class="course-image">
+            <img [src]="course.imageUrl" [alt]="course.title">
+            @if (course.bestseller) {
+              <span class="bestseller-badge">Bestseller</span>
+            }
+          </div>
+          <div class="course-content">
+            <h3 class="course-title">{{ course.title }}</h3>
+            <p class="course-instructor">{{ course.instructor }}</p>
+            <div class="course-rating">
+              <span class="rating">{{ course.rating }}</span>
+              <span class="stars">
+                @for (star of [1,2,3,4,5]; track star) {
+                  <span class="star" [class.filled]="course.rating >= star">★</span>
+                }
+              </span>
+              <span class="review-count">({{ course.reviewCount }})</span>
+            </div>
+            <div class="course-meta">
+              <span class="level">{{ course.level }}</span>
+              <span class="duration">{{ course.duration }}</span>
+            </div>
+            <div class="course-price">
+              <span class="discount-price">${{ course.discountPrice }}</span>
+              <span class="original-price">${{ course.price }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
